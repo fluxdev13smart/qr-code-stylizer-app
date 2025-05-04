@@ -50,10 +50,23 @@ const QRCodeGenerator = () => {
     
     setOptions((prev) => ({ ...prev, ...newOptions }));
   };
+
+  // Listen for the custom event to switch to vcard tab
+  useEffect(() => {
+    const switchToVcardHandler = () => {
+      setOptions((prev) => ({ ...prev, dataType: 'vcard' }));
+    };
+    
+    document.addEventListener('switchToVcard', switchToVcardHandler);
+    
+    return () => {
+      document.removeEventListener('switchToVcard', switchToVcardHandler);
+    };
+  }, []);
   
   return (
     <div className="w-full space-y-8 animate-fade-in">
-      <Card className="backdrop-blur-md bg-white/80 border-white/20 shadow-lg">
+      <Card className="backdrop-blur-md bg-white/60 border-white/20 shadow-lg">
         <CardContent className="p-6">
           <DataTypeSelector
             dataType={options.dataType}

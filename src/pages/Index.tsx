@@ -16,7 +16,7 @@ const Index = () => {
               <QrCode className="mr-2 text-qr-purple" size={36} /> 
               QR Code Stylizer
             </h1>
-            <p className="text-gray-100 text-lg max-w-xl mx-auto animate-fade-in backdrop-blur-sm p-2 rounded-md bg-black/20">
+            <p className="text-gray-100 text-lg max-w-xl mx-auto animate-fade-in backdrop-blur-md p-2 rounded-md bg-black/30">
               Create custom QR codes for your business, marketing campaigns, or personal use. 
               Customize colors, add your logo, text, or emoji, and download in multiple formats.
             </p>
@@ -26,7 +26,7 @@ const Index = () => {
             <QRCodeGenerator />
           </main>
 
-          <footer className="mt-16 text-center text-gray-300 text-sm backdrop-blur-sm bg-black/30 p-2 rounded-md">
+          <footer className="mt-16 text-center text-gray-300 text-sm backdrop-blur-md bg-black/40 p-2 rounded-md">
             <p>© 2025 QR Code Stylizer. All rights reserved.</p>
           </footer>
         </div>
