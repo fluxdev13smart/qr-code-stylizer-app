@@ -29,39 +29,41 @@ const YoutubeBackground = ({ videoId, opacity = 0.65 }: YoutubeBackgroundProps) 
         style={{ opacity: overlayOpacity }}
       />
       
-      <style jsx>{`
-        @media screen and (min-width: 768px) {
-          .yt-wrapper {
-            overflow: hidden;
-            max-width: 100%;
+      <style>
+        {`
+          @media screen and (min-width: 768px) {
+            .yt-wrapper {
+              overflow: hidden;
+              max-width: 100%;
+            }
+
+            .yt-frame-container {
+              position: relative;
+              padding-bottom: 56.25%; 
+              padding-top: 25px;
+              width: 300%;
+              left: -100%;
+            }
+
+            .yt-frame-container iframe {
+              position: absolute; 
+              top: 0; 
+              left: 0; 
+              width: 100%; 
+              height: 100%;
+              pointer-events: none;
+            }
           }
 
-          .yt-frame-container {
-            position: relative;
-            padding-bottom: 56.25%; 
-            padding-top: 25px;
-            width: 300%;
-            left: -100%;
+          @media screen and (max-width: 767px) {
+            .yt-frame-container iframe {
+              aspect-ratio: 16/9;
+              pointer-events: none;
+              width: 100%;
+            }
           }
-
-          .yt-frame-container iframe {
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
-            pointer-events: none;
-          }
-        }
-
-        @media screen and (max-width: 767px) {
-          .yt-frame-container iframe {
-            aspect-ratio: 16/9;
-            pointer-events: none;
-            width: 100%;
-          }
-        }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
