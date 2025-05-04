@@ -154,8 +154,10 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
       // Apply overlay to the QR code container
       if (qrRef.current) {
         const svgContainer = qrRef.current.querySelector('svg');
-        if (svgContainer) {
-          svgContainer.parentNode?.style.position = 'relative';
+        if (svgContainer && svgContainer.parentNode) {
+          // Fixed: Use type assertion and check for null before setting style
+          const parentElement = svgContainer.parentNode as HTMLElement;
+          parentElement.style.position = 'relative';
           qrRef.current.appendChild(overlay);
         }
       }
