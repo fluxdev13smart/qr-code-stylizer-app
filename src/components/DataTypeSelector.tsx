@@ -64,6 +64,18 @@ const renderInputForType = (
           />
         </div>
       );
+    case 'url':
+      return (
+        <div className="space-y-2">
+          <Label htmlFor="url-input">Website URL</Label>
+          <Input
+            id="url-input"
+            placeholder="QRcodeSt.vercel.app"
+            value={data}
+            onChange={(e) => onDataChange(e.target.value)}
+          />
+        </div>
+      );
     case 'vcard':
       return (
         <div className="space-y-4">

@@ -11,7 +11,7 @@ import { validateQRData } from "@/lib/qrHelpers";
 const QRCodeGenerator = () => {
   const [options, setOptions] = useState<QRCodeOptions>({
     ...DEFAULT_QR_OPTIONS,
-    data: 'https://lovable.dev',
+    data: 'QRcodeSt.vercel.app',
   });
   
   const [isValid, setIsValid] = useState(true);
