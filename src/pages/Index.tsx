@@ -6,7 +6,7 @@ import YoutubeBackground from "@/components/YoutubeBackground";
 const Index = () => {
   return (
     <>
-      <YoutubeBackground videoId="PQoLr7eVLUI" opacity={0.65} />
+      <YoutubeBackground videoId="PQoLr7eVLUI" opacity={0.6} />
       
       <div className="min-h-screen px-4 py-8 relative z-10">
         <div className="container mx-auto max-w-6xl">
@@ -14,7 +14,7 @@ const Index = () => {
             <h1 className="text-4xl font-bold bg-gradient-to-r from-qr-purple to-qr-dark-purple bg-clip-text text-transparent mb-2 animate-fade-in">
               QR Code Stylizer
             </h1>
-            <p className="text-gray-100 text-lg max-w-xl mx-auto animate-fade-in backdrop-blur-sm">
+            <p className="text-gray-100 text-lg max-w-xl mx-auto animate-fade-in backdrop-blur-sm p-2 rounded-md bg-black/20">
               Create custom QR codes for your business, marketing campaigns, or personal use. 
               Customize colors, add your logo, text, or emoji, and download in multiple formats.
             </p>
@@ -24,7 +24,7 @@ const Index = () => {
             <QRCodeGenerator />
           </main>
 
-          <footer className="mt-16 text-center text-gray-300 text-sm">
+          <footer className="mt-16 text-center text-gray-300 text-sm backdrop-blur-sm bg-black/30 p-2 rounded-md">
             <p>© 2025 QR Code Stylizer. All rights reserved.</p>
           </footer>
         </div>

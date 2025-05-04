@@ -34,6 +34,20 @@ const QRCodeGenerator = () => {
   };
   
   const handleOptionsChange = (newOptions: Partial<QRCodeOptions>) => {
+    // Special handling for overlay type changes to ensure proper setup
+    if (newOptions.overlayType && newOptions.overlayType !== options.overlayType) {
+      // Clear logo when switching to text or emoji
+      if (newOptions.overlayType === 'text' || newOptions.overlayType === 'emoji') {
+        newOptions.logoImage = null;
+      }
+      
+      // Ensure high error correction when using overlays
+      if (options.errorCorrectionLevel !== 'H') {
+        newOptions.errorCorrectionLevel = 'H';
+        toast.info("Error correction level set to High for best overlay compatibility");
+      }
+    }
+    
     setOptions((prev) => ({ ...prev, ...newOptions }));
   };
   

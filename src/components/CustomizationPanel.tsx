@@ -35,7 +35,7 @@ const CustomizationPanel = ({ options, onOptionsChange }: CustomizationPanelProp
   };
 
   return (
-    <Card className="w-full">
+    <Card className="w-full bg-white/90 backdrop-blur-md border-white/20">
       <CardHeader>
         <CardTitle>Customize QR Code</CardTitle>
       </CardHeader>

@@ -183,12 +183,12 @@ const EnhancedColorPicker = ({ color, onChange, label }: EnhancedColorPickerProp
               <span className="sr-only">Pick a color</span>
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-80 p-4" align="start">
-            <div className="space-y-4">
-              {/* Apple-style hue wheel */}
+          <PopoverContent className="w-64 p-3" align="start">
+            <div className="space-y-3">
+              {/* Simplified hue wheel */}
               <div 
                 ref={hueWheelRef}
-                className="relative w-52 h-52 mx-auto rounded-full shadow-md overflow-hidden cursor-pointer"
+                className="relative w-40 h-40 mx-auto rounded-full shadow-md overflow-hidden cursor-pointer"
                 style={{
                   background: `conic-gradient(
                     from 0deg,
@@ -208,25 +208,25 @@ const EnhancedColorPicker = ({ color, onChange, label }: EnhancedColorPickerProp
                   <div 
                     className="absolute"
                     style={{
-                      width: '12px', 
-                      height: '12px', 
+                      width: '10px', 
+                      height: '10px', 
                       borderRadius: '50%',
                       border: '2px solid white',
                       boxShadow: '0 0 4px rgba(0,0,0,0.5)',
                       backgroundColor: `hsl(${hue}, 100%, 50%)`,
-                      transform: `rotate(${hue}deg) translateX(98px)`,
+                      transform: `rotate(${hue}deg) translateX(68px)`,
                       transformOrigin: 'center center',
                     }}
                   ></div>
                 </div>
               </div>
               
-              {/* Saturation-Lightness canvas */}
-              <div className="relative w-52 h-52 mx-auto shadow-md overflow-hidden">
+              {/* Smaller Saturation-Lightness canvas */}
+              <div className="relative w-40 h-40 mx-auto shadow-md overflow-hidden">
                 <canvas 
                   ref={satLightCanvasRef}
-                  width="200" 
-                  height="200" 
+                  width="150" 
+                  height="150" 
                   className="w-full h-full cursor-pointer"
                   onClick={handleSatLightClick}
                 />
@@ -238,57 +238,6 @@ const EnhancedColorPicker = ({ color, onChange, label }: EnhancedColorPickerProp
                     left: `${saturation}%`
                   }}
                 ></div>
-              </div>
-              
-              <div className="grid grid-cols-3 gap-2">
-                <div>
-                  <Label htmlFor="hue-value">Hue</Label>
-                  <Input
-                    id="hue-value"
-                    type="number"
-                    min="0"
-                    max="360"
-                    value={hue}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      setHue(value);
-                      updateColorFromHSL(value, saturation, lightness);
-                    }}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="sat-value">Saturation</Label>
-                  <Input
-                    id="sat-value"
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={saturation}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      setSaturation(value);
-                      updateColorFromHSL(hue, value, lightness);
-                    }}
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="light-value">Lightness</Label>
-                  <Input
-                    id="light-value"
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={lightness}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      setLightness(value);
-                      updateColorFromHSL(hue, saturation, value);
-                    }}
-                    className="mt-1"
-                  />
-                </div>
               </div>
               
               <div>

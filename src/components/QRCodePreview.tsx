@@ -22,6 +22,14 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
     const formattedData = formatQRData(options);
     if (!formattedData) return;
     
+    const dotType = options.dotType === "rounded" ? "dots" : "square";
+    
+    // Define overlay content based on type
+    let image = undefined;
+    if (options.overlayType === 'logo' && options.logoImage) {
+      image = options.logoImage;
+    }
+    
     if (!qrCode.current) {
       qrCode.current = new QRCodeStyling({
         width: options.size,
@@ -30,7 +38,7 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         data: formattedData,
         dotsOptions: {
           color: options.foregroundColor,
-          type: options.dotType,
+          type: dotType,
         },
         cornersSquareOptions: {
           color: options.foregroundColor,
@@ -46,17 +54,21 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         imageOptions: {
           crossOrigin: "anonymous",
           margin: 5,
-          // Fixed: Remove width/height from here as they're not valid properties
-          // Instead use the imageSize property
           imageSize: options.logoWidth,
           hideBackgroundDots: true,
         },
+        image: image,
         qrOptions: {
           errorCorrectionLevel: options.errorCorrectionLevel,
         },
       });
       
       qrCode.current.append(qrRef.current);
+      
+      // Add text or emoji overlay if selected
+      if (options.overlayType === 'text' || options.overlayType === 'emoji') {
+        addOverlayToQRCode();
+      }
     } else {
       qrCode.current.update({
         data: formattedData,
@@ -64,7 +76,7 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         height: options.size,
         dotsOptions: {
           color: options.foregroundColor,
-          type: options.dotType,
+          type: dotType,
         },
         cornersSquareOptions: {
           color: options.foregroundColor,
@@ -80,22 +92,82 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         qrOptions: {
           errorCorrectionLevel: options.errorCorrectionLevel,
         },
-        image: options.logoImage || undefined,
+        image: image,
         imageOptions: {
           crossOrigin: "anonymous",
-          // Fixed: Remove width/height from here as they're not valid properties
-          // Instead use the imageSize property
           imageSize: options.logoWidth,
           margin: 5,
           hideBackgroundDots: true,
         },
       });
+      
+      // Add text or emoji overlay if selected
+      if (options.overlayType === 'text' || options.overlayType === 'emoji') {
+        addOverlayToQRCode();
+      }
     }
   }, [options]);
+  
+  const addOverlayToQRCode = () => {
+    // Wait for QR code to render first
+    setTimeout(() => {
+      if (!qrRef.current) return;
+      
+      // Remove any existing text overlay
+      const existingOverlay = qrRef.current.querySelector('.qr-overlay');
+      if (existingOverlay) {
+        existingOverlay.remove();
+      }
+      
+      // Create overlay div
+      const overlay = document.createElement('div');
+      overlay.className = 'qr-overlay';
+      overlay.style.position = 'absolute';
+      overlay.style.top = '50%';
+      overlay.style.left = '50%';
+      overlay.style.transform = 'translate(-50%, -50%)';
+      overlay.style.background = 'white';
+      overlay.style.borderRadius = '50%';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.style.padding = '10px';
+      overlay.style.zIndex = '10';
+      
+      // Set size based on logo width
+      const size = options.logoWidth;
+      overlay.style.width = `${size}px`;
+      overlay.style.height = `${size}px`;
+      
+      // Add content based on overlay type
+      if (options.overlayType === 'text') {
+        overlay.style.fontFamily = options.overlayFontFamily;
+        overlay.style.fontSize = `${options.overlayFontSize}px`;
+        overlay.style.fontWeight = options.overlayFontWeight;
+        overlay.style.color = options.overlayFontColor;
+        overlay.textContent = options.overlayText;
+      } else if (options.overlayType === 'emoji') {
+        overlay.style.fontSize = `${options.overlayFontSize}px`;
+        overlay.textContent = options.overlayEmoji;
+      }
+      
+      // Apply overlay to the QR code container
+      if (qrRef.current) {
+        const svgContainer = qrRef.current.querySelector('svg');
+        if (svgContainer) {
+          svgContainer.parentNode?.style.position = 'relative';
+          qrRef.current.appendChild(overlay);
+        }
+      }
+    }, 100);
+  };
   
   const handleDownload = async (format: "svg" | "png") => {
     try {
       if (!qrCode.current) return;
+      
+      // For download, need to make sure the overlay is included
+      const qrElement = qrRef.current?.cloneNode(true) as HTMLElement;
       
       const dataUrl = await qrCode.current.getRawData(format);
       if (!dataUrl) {
@@ -114,9 +186,9 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
   };
   
   return (
-    <Card className="w-full bg-gradient-to-br from-white to-gray-50 border">
+    <Card className="w-full bg-white/90 backdrop-blur-md border-white/20">
       <CardContent className="flex flex-col items-center justify-center p-6 space-y-6">
-        <div ref={qrRef} className="rounded-lg overflow-hidden shadow-sm" />
+        <div ref={qrRef} className="rounded-lg overflow-hidden shadow-sm relative" />
         
         <div className="flex flex-wrap gap-2 justify-center">
           <Button 
