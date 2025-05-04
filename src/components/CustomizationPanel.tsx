@@ -1,12 +1,11 @@
 
-import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import ColorPicker from "./ColorPicker";
-import LogoUploader from "./LogoUploader";
+import EnhancedColorPicker from "./EnhancedColorPicker";
+import OverlayOptions from "./OverlayOptions";
 import { QRCodeOptions, QRDotType, QRErrorCorrectionLevel } from "@/types/qrTypes";
 
 interface CustomizationPanelProps {
@@ -35,18 +34,6 @@ const CustomizationPanel = ({ options, onOptionsChange }: CustomizationPanelProp
     onOptionsChange({ errorCorrectionLevel: value as QRErrorCorrectionLevel });
   };
 
-  const handleLogoChange = (logo: string | null) => {
-    onOptionsChange({ logoImage: logo });
-  };
-
-  const handleLogoSizeChange = (size: number) => {
-    onOptionsChange({ logoWidth: size, logoHeight: size });
-  };
-
-  const handleLogoOpacityChange = (opacity: number) => {
-    onOptionsChange({ logoOpacity: opacity });
-  };
-
   return (
     <Card className="w-full">
       <CardHeader>
@@ -54,12 +41,12 @@ const CustomizationPanel = ({ options, onOptionsChange }: CustomizationPanelProp
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ColorPicker 
+          <EnhancedColorPicker 
             color={options.foregroundColor}
             onChange={handleForegroundColorChange}
             label="Foreground Color"
           />
-          <ColorPicker 
+          <EnhancedColorPicker 
             color={options.backgroundColor}
             onChange={handleBackgroundColorChange}
             label="Background Color"
@@ -115,14 +102,10 @@ const CustomizationPanel = ({ options, onOptionsChange }: CustomizationPanelProp
         </div>
         
         <div className="space-y-2">
-          <Label>Logo</Label>
-          <LogoUploader
-            logo={options.logoImage}
-            setLogo={handleLogoChange}
-            logoSize={options.logoWidth}
-            setLogoSize={handleLogoSizeChange}
-            logoOpacity={options.logoOpacity}
-            setLogoOpacity={handleLogoOpacityChange}
+          <Label>Overlay Options</Label>
+          <OverlayOptions
+            options={options}
+            onOptionsChange={onOptionsChange}
           />
         </div>
       </CardContent>

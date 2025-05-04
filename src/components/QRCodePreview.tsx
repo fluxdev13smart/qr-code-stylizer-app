@@ -46,6 +46,10 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         imageOptions: {
           crossOrigin: "anonymous",
           margin: 5,
+          // Fixed: Remove width/height from here as they're not valid properties
+          // Instead use the imageSize property
+          imageSize: options.logoWidth,
+          hideBackgroundDots: true,
         },
         qrOptions: {
           errorCorrectionLevel: options.errorCorrectionLevel,
@@ -79,8 +83,9 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         image: options.logoImage || undefined,
         imageOptions: {
           crossOrigin: "anonymous",
-          width: options.logoWidth,
-          height: options.logoHeight,
+          // Fixed: Remove width/height from here as they're not valid properties
+          // Instead use the imageSize property
+          imageSize: options.logoWidth,
           margin: 5,
           hideBackgroundDots: true,
         },
@@ -98,7 +103,9 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         return;
       }
       
-      downloadQRCode(URL.createObjectURL(dataUrl), format);
+      // Fixed: Ensure we're only handling Blob type here, which is what qr-code-styling returns
+      const blob = dataUrl as Blob;
+      downloadQRCode(URL.createObjectURL(blob), format);
       toast.success(`QR code downloaded as ${format.toUpperCase()}`);
     } catch (error) {
       console.error("Error downloading QR code:", error);
