@@ -14,8 +14,9 @@ const Index = () => {
           <header className="text-center mb-10">
             <h1 className="text-4xl font-bold bg-gradient-to-r from-qr-purple to-qr-dark-purple bg-clip-text text-transparent mb-2 animate-fade-in flex items-center justify-center">
               <QrCode className="mr-2 text-qr-purple" size={36} /> 
-              QR Code Stylizer
+              Pixel Snap
             </h1>
+            <p className="text-sm text-qr-purple font-medium mb-4 animate-fade-in">by Saeid Mohammad</p>
             <p className="text-gray-100 text-lg max-w-xl mx-auto animate-fade-in backdrop-blur-md p-2 rounded-md bg-black/30">
               Create custom QR codes for your business, marketing campaigns, or personal use. 
               Customize colors, add your logo, text, or emoji, and download in multiple formats.
@@ -27,7 +28,7 @@ const Index = () => {
           </main>
 
           <footer className="mt-16 text-center text-gray-300 text-sm backdrop-blur-md bg-black/30 p-2 rounded-md">
-            <p>© 2025 QR Code Stylizer. All rights reserved.</p>
+            <p>© 2025 Pixel Snap. All rights reserved.</p>
           </footer>
         </div>
       </div>
