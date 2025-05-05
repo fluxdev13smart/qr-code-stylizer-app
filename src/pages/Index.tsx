@@ -13,9 +13,9 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <header className="text-center mb-10">
             <div className="inline-block">
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-qr-purple via-qr-light-purple to-qr-dark-purple bg-clip-text text-transparent mb-2 animate-float flex items-center justify-center">
+              <h1 className="text-5xl font-bold mb-2 animate-float flex items-center justify-center">
                 <QrCode className="mr-2 text-qr-purple animate-pulse-light" size={40} /> 
-                <span className="relative">
+                <span className="relative text-white">
                   Pixel Snap
                   <Sparkles className="absolute -top-4 -right-6 text-yellow-300" size={20} />
                 </span>
