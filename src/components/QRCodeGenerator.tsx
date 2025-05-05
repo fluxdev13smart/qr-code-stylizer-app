@@ -11,7 +11,7 @@ import { validateQRData } from "@/lib/qrHelpers";
 const QRCodeGenerator = () => {
   const [options, setOptions] = useState<QRCodeOptions>({
     ...DEFAULT_QR_OPTIONS,
-    data: 'QRcodeSt.vercel.app',
+    data: 'pixelsnap.vercel.app',
   });
   
   const [isValid, setIsValid] = useState(true);
@@ -66,7 +66,7 @@ const QRCodeGenerator = () => {
   
   return (
     <div className="w-full space-y-8 animate-fade-in">
-      <Card className="backdrop-blur-md bg-white/60 border-white/20 shadow-lg">
+      <Card className="backdrop-blur-md bg-white/40 border-white/20 shadow-lg">
         <CardContent className="p-6">
           <DataTypeSelector
             dataType={options.dataType}

@@ -188,7 +188,7 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
   };
   
   return (
-    <Card className="w-full bg-white/90 backdrop-blur-md border-white/20">
+    <Card className="w-full bg-white/70 backdrop-blur-md border-white/20">
       <CardContent className="flex flex-col items-center justify-center p-6 space-y-6">
         <div ref={qrRef} className="rounded-lg overflow-hidden shadow-sm relative" />
         
