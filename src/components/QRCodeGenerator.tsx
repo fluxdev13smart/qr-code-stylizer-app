@@ -66,7 +66,7 @@ const QRCodeGenerator = () => {
   
   return (
     <div className="w-full space-y-8 animate-fade-in">
-      <Card className="backdrop-blur-md bg-white/40 border-white/20 shadow-lg">
+      <Card className="glass-card backdrop-blur-md bg-white/40 border-white/20 shadow-lg animate-float">
         <CardContent className="p-6">
           <DataTypeSelector
             dataType={options.dataType}

@@ -35,11 +35,11 @@ const CustomizationPanel = ({ options, onOptionsChange }: CustomizationPanelProp
   };
 
   return (
-    <Card className="w-full bg-white/90 backdrop-blur-md border-white/20">
-      <CardHeader>
-        <CardTitle>Customize QR Code</CardTitle>
+    <Card className="w-full glass-card backdrop-blur-md bg-white/30 border-white/20 shadow-lg hover:shadow-xl transition-all duration-300">
+      <CardHeader className="bg-gradient-to-r from-qr-purple/20 to-qr-dark-purple/20 rounded-t-lg">
+        <CardTitle className="text-shadow text-qr-purple">Customize QR Code</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <EnhancedColorPicker 
             color={options.foregroundColor}
@@ -53,8 +53,8 @@ const CustomizationPanel = ({ options, onOptionsChange }: CustomizationPanelProp
           />
         </div>
         
-        <div className="space-y-2">
-          <Label>Size: {options.size}px</Label>
+        <div className="space-y-2 bg-white/20 p-4 rounded-lg">
+          <Label className="text-shadow">Size: {options.size}px</Label>
           <Slider
             value={[options.size]}
             min={100}
@@ -65,8 +65,8 @@ const CustomizationPanel = ({ options, onOptionsChange }: CustomizationPanelProp
           />
         </div>
         
-        <div className="space-y-2">
-          <Label>Dot Style</Label>
+        <div className="space-y-2 bg-white/20 p-4 rounded-lg">
+          <Label className="text-shadow">Dot Style</Label>
           <RadioGroup
             value={options.dotType}
             onValueChange={handleDotTypeChange}
@@ -83,26 +83,26 @@ const CustomizationPanel = ({ options, onOptionsChange }: CustomizationPanelProp
           </RadioGroup>
         </div>
         
-        <div className="space-y-2">
-          <Label>Error Correction Level</Label>
+        <div className="space-y-2 bg-white/20 p-4 rounded-lg">
+          <Label className="text-shadow">Error Correction Level</Label>
           <Select value={options.errorCorrectionLevel} onValueChange={handleErrorCorrectionChange}>
-            <SelectTrigger>
+            <SelectTrigger className="bg-white/50">
               <SelectValue placeholder="Select error correction level" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white/90">
               <SelectItem value="L">Low (7%)</SelectItem>
               <SelectItem value="M">Medium (15%)</SelectItem>
               <SelectItem value="Q">Quartile (25%)</SelectItem>
               <SelectItem value="H">High (30%)</SelectItem>
             </SelectContent>
           </Select>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-gray-700 mt-1">
             Higher levels allow more damage but increase QR code size
           </p>
         </div>
         
-        <div className="space-y-2">
-          <Label>Overlay Options</Label>
+        <div className="space-y-2 bg-white/20 p-4 rounded-lg animate-pulse-light">
+          <Label className="text-shadow">Overlay Options</Label>
           <OverlayOptions
             options={options}
             onOptionsChange={onOptionsChange}
