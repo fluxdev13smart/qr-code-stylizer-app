@@ -54,7 +54,7 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         imageOptions: {
           crossOrigin: "anonymous",
           margin: 5,
-          imageSize: options.logoWidth,
+          imageSize: 0.4,
           hideBackgroundDots: true,
         },
         image: image,
@@ -97,7 +97,7 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         image: image,
         imageOptions: {
           crossOrigin: "anonymous",
-          imageSize: options.logoWidth,
+          imageSize: 0.4,
           margin: 5,
           hideBackgroundDots: true,
         },
