@@ -1,13 +1,12 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import QRCodeGenerator from "@/components/QRCodeGenerator";
-import YoutubeBackground from "@/components/YoutubeBackground";
 import { QrCode, Sparkles } from "lucide-react";
 
 const Index = () => {
   return (
     <>
-      <YoutubeBackground videoId="PQoLr7eVLUI" opacity={0.6} />
+      <div className="fixed inset-0 rain-background"></div>
       
       <div className="min-h-screen px-4 py-8 relative z-10">
         <div className="container mx-auto max-w-6xl">
