@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -10,78 +9,72 @@ import EnhancedColorPicker from "./EnhancedColorPicker";
 import LogoUploader from "./LogoUploader";
 import EmojiPicker from "./EmojiPicker";
 import { QRCodeOptions, QRFontFamily, QRFontWeight, QROverlayType } from "@/types/qrTypes";
-
 interface OverlayOptionsProps {
   options: QRCodeOptions;
   onOptionsChange: (options: Partial<QRCodeOptions>) => void;
 }
-
-const OverlayOptions = ({ options, onOptionsChange }: OverlayOptionsProps) => {
+const OverlayOptions = ({
+  options,
+  onOptionsChange
+}: OverlayOptionsProps) => {
   const handleOverlayTypeChange = (value: QROverlayType) => {
-    onOptionsChange({ overlayType: value });
+    onOptionsChange({
+      overlayType: value
+    });
   };
-
   const handleLogoChange = (logo: string | null) => {
-    onOptionsChange({ logoImage: logo });
+    onOptionsChange({
+      logoImage: logo
+    });
   };
-
   const handleLogoSizeChange = (size: number) => {
-    onOptionsChange({ logoWidth: size, logoHeight: size });
+    onOptionsChange({
+      logoWidth: size,
+      logoHeight: size
+    });
   };
-
   const handleLogoOpacityChange = (opacity: number) => {
-    onOptionsChange({ logoOpacity: opacity });
+    onOptionsChange({
+      logoOpacity: opacity
+    });
   };
-
   const handleOverlayTextChange = (text: string) => {
-    onOptionsChange({ overlayText: text });
+    onOptionsChange({
+      overlayText: text
+    });
   };
-
   const handleOverlayFontFamilyChange = (fontFamily: QRFontFamily) => {
-    onOptionsChange({ overlayFontFamily: fontFamily });
+    onOptionsChange({
+      overlayFontFamily: fontFamily
+    });
   };
-
   const handleOverlayFontSizeChange = (value: number[]) => {
-    onOptionsChange({ overlayFontSize: value[0] });
+    onOptionsChange({
+      overlayFontSize: value[0]
+    });
   };
-
   const handleOverlayFontWeightChange = (weight: QRFontWeight) => {
-    onOptionsChange({ overlayFontWeight: weight });
+    onOptionsChange({
+      overlayFontWeight: weight
+    });
   };
-
   const handleOverlayFontColorChange = (color: string) => {
-    onOptionsChange({ overlayFontColor: color });
+    onOptionsChange({
+      overlayFontColor: color
+    });
   };
-
   const handleEmojiChange = (emoji: string) => {
-    onOptionsChange({ overlayEmoji: emoji });
+    onOptionsChange({
+      overlayEmoji: emoji
+    });
   };
-
-  return (
-    <div className="space-y-6">
+  return <div className="space-y-6">
       <div className="space-y-2">
         <Label>Overlay Type</Label>
-        <RadioGroup
-          value={options.overlayType}
-          onValueChange={(value) => handleOverlayTypeChange(value as QROverlayType)}
-          className="flex gap-4"
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="logo" id="overlay-logo" />
-            <Label htmlFor="overlay-logo">Logo/Image</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="text" id="overlay-text" />
-            <Label htmlFor="overlay-text">Text</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="emoji" id="overlay-emoji" />
-            <Label htmlFor="overlay-emoji">Emoji</Label>
-          </div>
-        </RadioGroup>
+        
       </div>
 
-      <Tabs value={options.overlayType} onValueChange={(value) => handleOverlayTypeChange(value as QROverlayType)}>
+      <Tabs value={options.overlayType} onValueChange={value => handleOverlayTypeChange(value as QROverlayType)}>
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="logo">Logo</TabsTrigger>
           <TabsTrigger value="text">Text</TabsTrigger>
@@ -89,32 +82,18 @@ const OverlayOptions = ({ options, onOptionsChange }: OverlayOptionsProps) => {
         </TabsList>
         
         <TabsContent value="logo" className="space-y-4 animate-fade-in">
-          <LogoUploader
-            logo={options.logoImage}
-            setLogo={handleLogoChange}
-            logoSize={options.logoWidth}
-            setLogoSize={handleLogoSizeChange}
-            logoOpacity={options.logoOpacity}
-            setLogoOpacity={handleLogoOpacityChange}
-          />
+          <LogoUploader logo={options.logoImage} setLogo={handleLogoChange} logoSize={options.logoWidth} setLogoSize={handleLogoSizeChange} logoOpacity={options.logoOpacity} setLogoOpacity={handleLogoOpacityChange} />
         </TabsContent>
         
         <TabsContent value="text" className="space-y-4 animate-fade-in">
           <div className="space-y-2">
             <Label>Text Content</Label>
-            <Input
-              value={options.overlayText}
-              onChange={(e) => handleOverlayTextChange(e.target.value)}
-              placeholder="Enter text for overlay"
-            />
+            <Input value={options.overlayText} onChange={e => handleOverlayTextChange(e.target.value)} placeholder="Enter text for overlay" />
           </div>
           
           <div className="space-y-2">
             <Label>Font Family</Label>
-            <Select 
-              value={options.overlayFontFamily} 
-              onValueChange={(value) => handleOverlayFontFamilyChange(value as QRFontFamily)}
-            >
+            <Select value={options.overlayFontFamily} onValueChange={value => handleOverlayFontFamilyChange(value as QRFontFamily)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select font family" />
               </SelectTrigger>
@@ -133,21 +112,12 @@ const OverlayOptions = ({ options, onOptionsChange }: OverlayOptionsProps) => {
           
           <div className="space-y-2">
             <Label>Font Size: {options.overlayFontSize}px</Label>
-            <Slider
-              value={[options.overlayFontSize]}
-              min={10}
-              max={60}
-              step={1}
-              onValueChange={handleOverlayFontSizeChange}
-            />
+            <Slider value={[options.overlayFontSize]} min={10} max={60} step={1} onValueChange={handleOverlayFontSizeChange} />
           </div>
           
           <div className="space-y-2">
             <Label>Font Weight</Label>
-            <Select 
-              value={options.overlayFontWeight} 
-              onValueChange={(value) => handleOverlayFontWeightChange(value as QRFontWeight)}
-            >
+            <Select value={options.overlayFontWeight} onValueChange={value => handleOverlayFontWeightChange(value as QRFontWeight)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select font weight" />
               </SelectTrigger>
@@ -164,36 +134,22 @@ const OverlayOptions = ({ options, onOptionsChange }: OverlayOptionsProps) => {
           
           <div className="space-y-2">
             <Label>Font Color</Label>
-            <EnhancedColorPicker
-              color={options.overlayFontColor}
-              onChange={handleOverlayFontColorChange}
-            />
+            <EnhancedColorPicker color={options.overlayFontColor} onChange={handleOverlayFontColorChange} />
           </div>
         </TabsContent>
         
         <TabsContent value="emoji" className="space-y-4 animate-fade-in">
           <div className="space-y-2">
             <Label>Select Emoji</Label>
-            <EmojiPicker 
-              selectedEmoji={options.overlayEmoji} 
-              onEmojiSelect={handleEmojiChange}
-            />
+            <EmojiPicker selectedEmoji={options.overlayEmoji} onEmojiSelect={handleEmojiChange} />
           </div>
           
           <div className="space-y-2">
             <Label>Emoji Size: {options.overlayFontSize}px</Label>
-            <Slider
-              value={[options.overlayFontSize]}
-              min={20}
-              max={80}
-              step={1}
-              onValueChange={handleOverlayFontSizeChange}
-            />
+            <Slider value={[options.overlayFontSize]} min={20} max={80} step={1} onValueChange={handleOverlayFontSizeChange} />
           </div>
         </TabsContent>
       </Tabs>
-    </div>
-  );
+    </div>;
 };
-
 export default OverlayOptions;
