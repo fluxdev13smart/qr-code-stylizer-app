@@ -6,12 +6,12 @@ import { QrCode, Sparkles } from "lucide-react";
 const Index = () => {
   return (
     <>
-      <div className="fixed inset-0 rain-background"></div>
+      <div className="fixed inset-0 fire-background"></div>
       
       <div className="min-h-screen px-4 py-8 relative z-10">
         <div className="container mx-auto max-w-6xl">
           <header className="text-center mb-10">
-            <div className="inline-block">
+            <div className="inline-block bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-6 py-4">
               <h1 className="text-5xl font-bold mb-2 animate-float flex items-center justify-center">
                 <QrCode className="mr-2 text-qr-purple animate-pulse-light" size={40} /> 
                 <span className="relative text-white">
