@@ -65,10 +65,12 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
       
       qrCode.current.append(qrRef.current);
       
-      // Add text or emoji overlay if selected
-      if (options.overlayType === 'text' || options.overlayType === 'emoji') {
-        addOverlayToQRCode();
-      }
+      // Add text or emoji overlay after initial render
+      setTimeout(() => {
+        if (options.overlayType === 'text' || options.overlayType === 'emoji') {
+          addOverlayToQRCode();
+        }
+      }, 100);
     } else {
       qrCode.current.update({
         data: formattedData,
@@ -101,10 +103,12 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         },
       });
       
-      // Add text or emoji overlay if selected
-      if (options.overlayType === 'text' || options.overlayType === 'emoji') {
-        addOverlayToQRCode();
-      }
+      // Add text or emoji overlay after update
+      setTimeout(() => {
+        if (options.overlayType === 'text' || options.overlayType === 'emoji') {
+          addOverlayToQRCode();
+        }
+      }, 100);
     }
   }, [options]);
   
@@ -119,6 +123,11 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
         existingOverlay.remove();
       }
       
+      // Only add overlay for text or emoji types
+      if (options.overlayType !== 'text' && options.overlayType !== 'emoji') {
+        return;
+      }
+      
       // Create overlay div
       const overlay = document.createElement('div');
       overlay.className = 'qr-overlay';
@@ -126,42 +135,42 @@ const QRCodePreview = ({ options }: QRCodePreviewProps) => {
       overlay.style.top = '50%';
       overlay.style.left = '50%';
       overlay.style.transform = 'translate(-50%, -50%)';
-      overlay.style.background = 'white';
-      overlay.style.borderRadius = '50%';
+      overlay.style.background = options.backgroundColor;
+      overlay.style.borderRadius = '8px';
       overlay.style.display = 'flex';
       overlay.style.alignItems = 'center';
       overlay.style.justifyContent = 'center';
-      overlay.style.padding = '10px';
+      overlay.style.padding = '8px';
       overlay.style.zIndex = '10';
+      overlay.style.border = `2px solid ${options.foregroundColor}`;
+      overlay.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
       
-      // Set size based on logo width
-      const size = options.logoWidth;
-      overlay.style.width = `${size}px`;
-      overlay.style.height = `${size}px`;
+      // Set size based on font size and content
+      const baseSize = Math.max(options.overlayFontSize + 20, 40);
+      overlay.style.minWidth = `${baseSize}px`;
+      overlay.style.minHeight = `${baseSize}px`;
       
       // Add content based on overlay type
-      if (options.overlayType === 'text') {
+      if (options.overlayType === 'text' && options.overlayText) {
         overlay.style.fontFamily = options.overlayFontFamily;
         overlay.style.fontSize = `${options.overlayFontSize}px`;
         overlay.style.fontWeight = options.overlayFontWeight;
         overlay.style.color = options.overlayFontColor;
+        overlay.style.whiteSpace = 'nowrap';
         overlay.textContent = options.overlayText;
-      } else if (options.overlayType === 'emoji') {
+      } else if (options.overlayType === 'emoji' && options.overlayEmoji) {
         overlay.style.fontSize = `${options.overlayFontSize}px`;
+        overlay.style.lineHeight = '1';
         overlay.textContent = options.overlayEmoji;
       }
       
       // Apply overlay to the QR code container
       if (qrRef.current) {
-        const svgContainer = qrRef.current.querySelector('svg');
-        if (svgContainer && svgContainer.parentNode) {
-          // Fixed: Use type assertion and check for null before setting style
-          const parentElement = svgContainer.parentNode as HTMLElement;
-          parentElement.style.position = 'relative';
-          qrRef.current.appendChild(overlay);
-        }
+        // Ensure the QR container is positioned relative
+        qrRef.current.style.position = 'relative';
+        qrRef.current.appendChild(overlay);
       }
-    }, 100);
+    }, 200);
   };
   
   const handleDownload = async (format: "svg" | "png") => {

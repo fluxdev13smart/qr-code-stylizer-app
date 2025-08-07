@@ -68,7 +68,7 @@ const LogoUploader = ({
         {!logo ? (
           <div
             className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
-              isDragging ? "border-qr-purple bg-qr-soft-purple" : "border-gray-300"
+              isDragging ? "border-primary bg-primary/10" : "border-border hover:border-primary/50"
             }`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
