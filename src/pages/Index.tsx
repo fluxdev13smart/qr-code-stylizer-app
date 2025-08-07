@@ -6,7 +6,7 @@ import { QrCode, Sparkles } from "lucide-react";
 const Index = () => {
   return (
     <>
-      <div className="fixed inset-0 fire-background"></div>
+      <div className="cosmic-background"></div>
       
       <div className="min-h-screen px-4 py-8 relative z-10">
         <div className="container mx-auto max-w-6xl">
